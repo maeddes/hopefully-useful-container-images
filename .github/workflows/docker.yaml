@@ -40,7 +40,7 @@ jobs:
           context: .
           file: ./sample/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/myapp:${{ steps.meta.outputs.tags }} , ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/myapp:v0.1 , ${{ secrets.DOCKER_USERNAME }}/myapp:latest
           #tags: ${{ steps.meta.outputs.tags }}, latest
           labels: ${{ steps.meta.outputs.labels }}
 
