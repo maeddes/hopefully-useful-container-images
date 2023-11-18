@@ -1,0 +1,24 @@
+name: Azure CLI
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_PLAYGROUND }}
+
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.30.0
+        inlineScript: |
+          az account show
+          az aks list --query '[].{Name:name, State:powerState.code}' -o table
+          az vm list -d --query '[].{Name:name, RG:resourceGroup, IP:publicIps, Id:vmId, Power:powerState}' -o table
